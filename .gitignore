@@ -1,0 +1,10 @@
+.idea
+.settings
+bin
+documentum
+logs
+out
+src-leg
+.classpath
+.project
+simpleDocumentum.iml
