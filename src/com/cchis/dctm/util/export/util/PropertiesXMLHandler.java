@@ -17,8 +17,8 @@ import java.util.Map;
 import static com.cchis.dctm.util.export.util.ExportConstants.DCTM_R_OBJECT_ID;
 import static com.cchis.dctm.util.export.util.ExportConstants.EMPTY_STRING;
 import static com.cchis.dctm.util.export.util.LongFields.*;
-import static com.cchis.dctm.util.export.util.LongFieldsValidator.ICS_INSIGHT_BILL;
-import static com.cchis.dctm.util.export.util.LongFieldsValidator.ICS_INSIGHT_REG;
+import static com.cchis.dctm.util.export.util.exec.LongFieldsValidator.ICS_INSIGHT_BILL;
+import static com.cchis.dctm.util.export.util.exec.LongFieldsValidator.ICS_INSIGHT_REG;
 
 public class PropertiesXMLHandler extends DefaultHandler {
 
@@ -116,9 +116,7 @@ public class PropertiesXMLHandler extends DefaultHandler {
         IDfSession session = SessionManagerHandler.getInstance().getMainSession();
         String qual = " from %s (all) where r_object_id = '%s'";
         String dqlBuf = "select ";
-        if (ICS_INSIGHT_BILL.equals(type)) {
-            dqlBuf += Util.commaJoinStrings(DCTM_ICS_DESCRIPTION, DCTM_ICS_DESCRIPTION2, DCTM_ICS_REQUIREMENTS, DCTM_ICS_EMAIL_ALERT);
-        } else if (ICS_INSIGHT_REG.equals(type)) {
+        if (ICS_INSIGHT_BILL.equals(type) || ICS_INSIGHT_REG.equals(type)) {
             dqlBuf += Util.commaJoinStrings(DCTM_ICS_DESCRIPTION, DCTM_ICS_DESCRIPTION2, DCTM_ICS_REQUIREMENTS, DCTM_ICS_EMAIL_ALERT);
         }
 
@@ -168,7 +166,7 @@ public class PropertiesXMLHandler extends DefaultHandler {
 
             if(desc.equals(dctmDesc) && desc2.equals(dctmDesc2)
                     && req.equals(dctmReq) && emailAlert.equals(dctmEmailAlert)) {
-                //LOG.debug(id + " : " + "match");
+                LOG.debug(id + " : " + "match");
             } else{
                 LOG.warn(id + " : NOT match. ");
                 LOG.debug("\t" + desc + " : " + dctmDesc + " : " + desc.equals(dctmDesc));
@@ -177,7 +175,6 @@ public class PropertiesXMLHandler extends DefaultHandler {
                 LOG.debug("\t" + emailAlert + " : " + dctmEmailAlert + " : " + emailAlert.equals(dctmEmailAlert));
             }
 
-         //   LOG.debug(id + " : [" + entry.getValue()[0] + ", " + entry.getValue()[1] + "]");
         });
     }
 

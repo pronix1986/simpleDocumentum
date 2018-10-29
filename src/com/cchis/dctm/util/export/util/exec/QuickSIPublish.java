@@ -1,18 +1,12 @@
-package com.cchis.dctm.util.export.util;
+package com.cchis.dctm.util.export.util.exec;
 
 import com.cchis.dctm.util.export.LogHandler;
-import com.cchis.dctm.util.export.PublishResult;
 import com.cchis.dctm.util.export.SessionManagerHandler;
-import com.cchis.dctm.util.export.WebcHandler;
 import com.documentum.admin.object.IDfWebCacheConfig;
 import com.documentum.fc.client.IDfSession;
 import com.documentum.fc.common.DfId;
 import org.apache.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.cchis.dctm.util.export.util.ExportConstants.DEFAULT_INTERVAL;
 import static com.cchis.dctm.util.export.util.ExportConstants.MSG_ERROR;
 
 public class QuickSIPublish {

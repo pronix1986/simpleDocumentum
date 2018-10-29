@@ -1,7 +1,9 @@
-package com.cchis.dctm.util.export.util;
+package com.cchis.dctm.util.export.util.exec;
 
 import com.cchis.dctm.util.export.*;
 import com.cchis.dctm.util.export.report.ReportRecord;
+import com.cchis.dctm.util.export.util.FileUtil;
+import com.cchis.dctm.util.export.util.Util;
 import com.documentum.admin.object.IDfWebCacheConfig;
 import com.documentum.fc.client.IDfSession;
 import org.apache.commons.lang.StringUtils;
@@ -37,7 +39,7 @@ public class DuplicateNamesZipUpdater {
 
     private DuplicateNamesZipUpdater() { }
 
-    public static void update() {
+    private static void update() {
         File root = new File(EXPORT_DIR_PATH);
         String postfix = DUPLICATE_NAME + ZIP_EXT;
 

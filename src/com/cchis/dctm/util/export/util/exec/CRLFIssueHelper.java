@@ -1,8 +1,9 @@
-package com.cchis.dctm.util.export.util;
+package com.cchis.dctm.util.export.util.exec;
 
 import com.cchis.dctm.util.export.LogHandler;
 import com.cchis.dctm.util.export.SessionManagerHandler;
 import com.cchis.dctm.util.export.SqlConnector;
+import com.cchis.dctm.util.export.util.FileUtil;
 import com.documentum.fc.client.IDfSession;
 import com.documentum.fc.client.IDfSysObject;
 import com.documentum.fc.common.DfId;

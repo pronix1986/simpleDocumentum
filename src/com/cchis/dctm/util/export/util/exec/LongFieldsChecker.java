@@ -1,14 +1,13 @@
-package com.cchis.dctm.util.export.util;
+package com.cchis.dctm.util.export.util.exec;
 
 import com.cchis.dctm.util.export.DocumentHandler;
 import com.cchis.dctm.util.export.SessionManagerHandler;
 import com.cchis.dctm.util.export.SqlConnector;
-import com.cchis.dctm.util.export.report.ReportRecord;
+import com.cchis.dctm.util.export.util.Util;
 import com.documentum.fc.client.IDfSession;
 import com.documentum.fc.client.IDfSysObject;
 import com.documentum.fc.common.DfException;
 import com.documentum.fc.common.DfId;
-import com.documentum.wcm.IWcmAsyncTask;
 import org.apache.log4j.Logger;
 
 import java.sql.Connection;
@@ -21,14 +20,14 @@ import java.util.Map;
 
 import static com.cchis.dctm.util.export.util.ExportConstants.MSG_ERROR;
 import static com.cchis.dctm.util.export.util.ExportConstants.NEW_LINE;
-import static com.cchis.dctm.util.export.util.LongFieldsValidator.ICS_INSIGHT_REG;
-import static com.cchis.dctm.util.export.util.LongFieldsValidator.ICS_INSOURCE;
+import static com.cchis.dctm.util.export.util.exec.LongFieldsValidator.ICS_INSIGHT_REG;
+import static com.cchis.dctm.util.export.util.exec.LongFieldsValidator.ICS_INSOURCE;
 
 public class LongFieldsChecker {
     private static final Logger LOG = Logger.getLogger(LongFieldsChecker.class);
 
-    public static final String DCTM_ICS_REG_NAME = "ics_reg_name";
-    public static final String DCTM_ICS_CURRENT_CITATION = "ics_current_citation";
+    private static final String DCTM_ICS_REG_NAME = "ics_reg_name";
+    private static final String DCTM_ICS_CURRENT_CITATION = "ics_current_citation";
 
     private static Connection conn;
 

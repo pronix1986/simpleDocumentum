@@ -1,7 +1,6 @@
-package com.cchis.dctm.util.export.util;
+package com.cchis.dctm.util.export.util.exec;
 
 import com.cchis.dctm.util.export.*;
-import com.cchis.dctm.util.export.exception.ExportException;
 import com.documentum.admin.object.IDfWebCacheConfig;
 import com.documentum.fc.client.IDfEnumeration;
 import com.documentum.fc.client.IDfSession;
