@@ -208,6 +208,7 @@
 			<src path="${basedir}/src"/>
 			<include name="com/cchis/dctm/util/DctmUtils.java"/>
 			<include name="com/cchis/dctm/util/export/**/*.java"/>
+			<exclude name="com/cchis/dctm/util/export/test/**/*.java"/>
 			<classpath refid="export-libs"/>
 		</javac>
 		<jar destfile="${basedir}/build/util/wkfs-export-util.jar">
