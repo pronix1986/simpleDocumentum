@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="WKFS" default="info" basedir="..">
+
+	<property file="${basedir}/ant/build.properties"/>
+
+	<patternset id="library.patterns">
+		<include name="*.jar"/>
+		<include name="*.class"/>
+	</patternset>
+
+	<path id="wp-libs">
+		<pathelement location="${basedir}/lib/webpublisher_6.5.0.0019SP7/WEB-INF/classes"/>
+		<fileset dir="${basedir}/lib/webpublisher_6.5.0.0019SP7/WEB-INF/lib">
+			<patternset refid="library.patterns"/>
+		</fileset>
+		<fileset dir="${basedir}/lib/jdom-1.0">
+			<patternset refid="library.patterns"/>
+		</fileset>
+		<fileset dir="${basedir}/lib/exp4j">
+			<patternset refid="library.patterns"/>
+		</fileset>
+		<fileset dir="${basedir}/lib/jakarta-taglibs-standard">
+			<patternset refid="library.patterns"/>
+		</fileset>
+		<fileset dir="${basedir}/lib/apache-tomcat-7.0.33/lib">
+			<patternset refid="library.patterns"/>
+		</fileset>    
+	</path>
+
+	<path id="jms-libs">
+		<fileset dir="${basedir}/lib/webpublisher_6.5.0.0019SP7/WEB-INF/lib">
+			<patternset refid="library.patterns"/>
+		</fileset>		
+		<fileset dir="${basedir}/lib/content-server-6.7SP2">
+			<patternset refid="library.patterns"/>
+		</fileset>    
+	</path>
+	
+	<path id="export-libs">
+		<path refid="wp-libs"/>
+		<fileset dir="${basedir}/lib/webcache">
+			<patternset refid="library.patterns"/>
+		</fileset>		
+		<fileset dir="${basedir}/lib/log4j">
+			<patternset refid="library.patterns"/>
+		</fileset>	
+	</path>
+	
+	<target name="info">
+		<echo message="Automated build script"/>
+	</target>
+
+	<target name="clean">
+		<delete dir="${basedir}/build"/>
+	</target>
+
+	<target name="build" depends="clean">
+		<echo message="ENV: ${wkfs.env}"/>
+		<antcall target="build-wp"/>
+		<antcall target="build-util"/>
+		<!--<antcall target="build-export-util"/>-->
+		<antcall target="build-jms"/>
+		<antcall target="build-configs"/>
+		<antcall target="build-dar"/>
+		<antcall target="build-tbo"/>
+	</target>
+
+	<target name="compile-wp">
+		<mkdir dir="${basedir}/build/wp/classes"/>
+		<javac destdir="${basedir}/build/wp/classes" 
+				debug="on" 
+				debuglevel="lines,vars,source" 
+				source="1.6"
+				includeantruntime="false">
+			<src path="${basedir}/src"/>
+			<exclude name="com/cchis/dctm/tbo/WcmChannelFld.java"/>
+			<exclude name="com/cchis/dctm/util/CleanUpUtil.java"/>
+			<exclude name ="com/cchis/dctm/util/export/**"/>
+			<classpath refid="wp-libs"/>
+		</javac>
+	</target>
+
+	<target name="build-wp" depends="compile-wp">
+		<mkdir dir="${basedir}/build/wp/war"/>
+		<unzip src="${basedir}/lib/wp.war" dest="${basedir}/build/wp/war"/>
+		<copy todir="${basedir}/build/wp/war/WEB-INF/classes" overwrite="true">
+			<fileset dir="${basedir}/env/${wkfs.env}/dfc/wp_publish">
+				<include name="dfc.properties"/>
+			</fileset>
+		</copy>
+		<copy todir="${basedir}/build/wp/war/WEB-INF/classes" overwrite="true">
+			<fileset dir="${basedir}/build/wp/classes"/>
+		</copy>
+		<copy todir="${basedir}/build/wp/war/WEB-INF/lib" overwrite="true">
+			<fileset dir="${basedir}/lib/jdom-1.0">
+				<include name="jdom.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="${basedir}/build/wp/war/WEB-INF/lib" overwrite="true">
+			<fileset dir="${basedir}/lib/jakarta-taglibs-standard">
+				<include name="jstl-1.2.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="${basedir}/build/wp/war/WEB-INF/lib" overwrite="true">
+			<fileset dir="${basedir}/lib/exp4j">
+				<include name="exp4j-0.4.4.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="${basedir}/build/wp/war/WEB-INF/tlds" overwrite="true">
+			<fileset dir="${basedir}/tlds"/>
+		</copy>
+		<copy todir="${basedir}/build/wp/war/custom" overwrite="true">
+			<fileset dir="${basedir}/custom"/>
+		</copy>
+		<replace file="${basedir}/build/wp/war/WEB-INF/classes/com/documentum/web/formext/Environment.properties" 
+				 token="${tree.show.nodes.default.value}" 
+				 value="${tree.show.nodes.correct.value}"/>
+		<copy todir="${basedir}/build/wp/war/wp/editors/contenteditor/resources" overwrite="true">
+			<fileset dir="${basedir}/lib/editlive/resources"/>
+		</copy>
+		<copy todir="${basedir}/build/wp/war/wdk/theme/documentum/icons/type" overwrite="true">
+			<fileset dir="${basedir}/lib/images">
+				<include name="t_dm_webc_config_16.gif"/>
+				<include name="t_dm_webc_config_32.gif"/>
+				<include name="t_dm_webc_config_64.gif"/>
+			</fileset>
+		</copy>
+		<copy todir="${basedir}/build/wp/war/webtop/theme/documentum/icons/browsertree" overwrite="true">
+			<fileset dir="${basedir}/lib/images">
+				<include name="scsadmin.gif"/>
+				<include name="scsconfiguration.gif"/>
+			</fileset>
+		</copy>
+		<war destfile="${basedir}/build/wp_publish.war">
+			<zipfileset dir="${basedir}/build/wp/war"/>
+		</war>		
+		<copy todir="${basedir}/build/wp/war/WEB-INF/classes" overwrite="true">
+			<fileset dir="${basedir}/env/${wkfs.env}/dfc/wp">
+				<include name="dfc.properties"/>
+			</fileset>
+		</copy>
+		<replace file="${basedir}/build/wp/war/custom/app/menubar.jsp" 
+				 token="${publish.scs.enabled.menu}" 
+				 value="${publish.scs.disabled.menu}"/>
+		<replace file="${basedir}/build/wp/war/custom/config/browsertree/browsertree_component.xml" 
+				 token="${publishing.node.start}" 
+				 value="${comment.tag.start}"/>
+		<replace file="${basedir}/build/wp/war/custom/config/browsertree/browsertree_component.xml" 
+				 token="${publishing.node.end}" 
+				 value="${comment.tag.end}"/>
+		<war destfile="${basedir}/build/wp.war">
+			<zipfileset dir="${basedir}/build/wp/war"/>
+		</war>
+		<delete dir="${basedir}/build/wp"/>
+	</target>
+
+	<target name="compile-tbo">
+		<mkdir dir="${basedir}/build/tbo/classes"/>
+		<javac destdir="${basedir}/build/tbo/classes" 
+				debug="on" 
+				debuglevel="lines,vars,source" 
+				source="1.6"
+				includeantruntime="false">
+			<src path="${basedir}/src"/>
+			<include name="com/cchis/dctm/tbo/WcmChannelFld.java"/>
+			<classpath refid="wp-libs"/>
+		</javac>
+		<jar destfile="${basedir}/build/tbo/wkfs-tbo.jar">
+			<fileset dir="${basedir}/build/tbo/classes"/>
+		</jar>
+		<delete dir="${basedir}/build/tbo/classes"/>
+	</target>
+
+	<target name="build-tbo" depends="compile-tbo">
+		<zip destfile="${basedir}/build/tbo.zip">
+			<fileset dir="${basedir}/build/tbo">
+				<include name="wkfs-tbo.jar"/>
+			</fileset>
+		</zip>
+		<delete dir="${basedir}/build/tbo"/>
+	</target>
+
+	<target name="compile-util">
+		<mkdir dir="${basedir}/build/util/classes"/>
+		<javac destdir="${basedir}/build/util/classes" 
+				debug="on" 
+				debuglevel="lines,vars,source" 
+				source="1.6"
+				includeantruntime="false">
+			<src path="${basedir}/src"/>
+      <include name="com/cchis/dctm/util/CleanUpUtil.java"/>
+			<classpath refid="wp-libs"/>
+		</javac>
+		<jar destfile="${basedir}/build/util/wkfs-cleanup-util.jar">
+			<fileset dir="${basedir}/build/util/classes"/>
+		</jar>
+		<delete dir="${basedir}/build/util/classes"/>
+	</target>
+	
+	
+	<target name="compile-export-util" depends="clean">
+		<mkdir dir="${basedir}/build/util/classes"/>
+		<javac destdir="${basedir}/build/util/classes" 
+				debug="on" 
+				debuglevel="lines,vars,source" 
+				source="1.8"
+				includeantruntime="false">
+			<src path="${basedir}/src"/>
+			<include name="com/cchis/dctm/util/DctmUtils.java"/>
+			<include name="com/cchis/dctm/util/export/**/*.java"/>
+			<classpath refid="export-libs"/>
+		</javac>
+		<jar destfile="${basedir}/build/util/wkfs-export-util.jar">
+			<fileset dir="${basedir}/build/util/classes"/>
+		</jar>
+		<delete dir="${basedir}/build/util/classes"/>
+	</target>
+
+	<target name="build-util" depends="compile-util">
+		<zip destfile="${basedir}/build/cleanup-util.zip">			
+			<zipfileset dir="${basedir}/lib/webpublisher_6.5.0.0019SP7/WEB-INF/lib" prefix="lib"/>
+			<zipfileset dir="${basedir}/build/util" prefix="lib">
+				<include name="wkfs-cleanup-util.jar"/>
+			</zipfileset>
+			<zipfileset dir="${basedir}/lib/webpublisher_6.5.0.0019SP7/WEB-INF/classes" prefix="classes">
+				<exclude name="dfc.properties"/>
+				<exclude name="log4j.properties"/>
+			</zipfileset>
+			<zipfileset dir="${basedir}/env/${wkfs.env}/cleanup_util" prefix="classes">
+				<include name="cleanup.properties"/>
+				<include name="log4j.properties"/>
+			</zipfileset>
+			<zipfileset dir="${basedir}/env/${wkfs.env}/dfc/wp" prefix="classes">
+				<include name="dfc.properties"/>
+			</zipfileset>
+			<zipfileset dir="${basedir}/env/${wkfs.env}/cleanup_util">
+				<include name="run.bat"/>
+			</zipfileset>
+		</zip>
+		<delete dir="${basedir}/build/util"/>
+	</target>
+	
+	<target name="build-export-util" depends="compile-export-util">
+		<zip destfile="${basedir}/build/export-util.zip">			
+			<zipfileset dir="${basedir}/lib/webpublisher_6.5.0.0019SP7/WEB-INF/lib" prefix="lib" excludes="**/licenses/**">
+				<exclude name="All-MB.jar"/>
+				<exclude name="AMService.jar"/>
+				<exclude name="bofirm.jar"/>
+				<exclude name="bpmutil.jar"/>
+				<exclude name="castor-1.1-xml.jar"/>
+				<exclude name="commons-jxpath-1.2.jar"/>
+				<exclude name="ci.jar"/>
+				<exclude name="collaboration.jar"/>
+				<exclude name="common.jar"/>
+				<exclude name="commons-codec-1.3.jar"/>
+				<exclude name="commons-fileupload-1.2.1.jar"/>
+				<exclude name="commons-httpclient-3.0.jar"/>
+				<exclude name="ctsTransform.jar"/>
+				<exclude name="dam_services.jar"/>
+				<exclude name="Dart.jar"/>
+				<exclude name="dms-client-api.jar"/>
+				<exclude name="jaxb-api.jar"/>
+				<exclude name="jaxb-impl.jar"/>
+				<exclude name="jsr173_api.jar"/>
+				<exclude name="krbutil.jar"/>
+				<exclude name="questFixForJDK7.jar"/>
+				<exclude name="vsj-license.jar"/>
+				<exclude name="vsj-standard-3.3.jar"/>
+				<exclude name="xtrim-api.jar"/>
+				<exclude name="xtrim-server.jar"/>
+				<exclude name="DmcRecords.jar"/>
+				<exclude name="dps.jar"/>
+				<exclude name="ESAPI-1.4.5a.jar"/>
+				<exclude name="extended-search-api.jar"/>
+				<exclude name="fss.jar"/>
+				<exclude name="gaf.jar"/>
+				<exclude name="htmlcleaner-2.4.jar"/>
+				<exclude name="image-services-api.jar"/>
+				<exclude name="inbox-impl.jar"/>
+				<exclude name="inbox.jar"/>
+				<exclude name="mac_utilities.jar"/>
+				<exclude name="messageArchive.jar"/>
+				<exclude name="messageService.jar"/>
+				<exclude name="microsoft.jar"/>
+				<exclude name="portlet.jar"/>
+				<exclude name="preset-api.jar"/>
+				<exclude name="qa-utils.jar"/>
+				<exclude name="regexp.jar"/>
+				<exclude name="ss_css2.jar"/>
+				<exclude name="startwf-impl.jar"/>
+				<exclude name="startwf.jar"/>
+				<exclude name="subscription.jar"/>
+				<exclude name="wcm-wf-impl.jar"/>
+				<exclude name="webwfdeserver.jar"/>
+				<exclude name="wf-common.jar"/>
+				<exclude name="workflow.jar"/>
+				<exclude name="Workflow.dar"/>
+				<exclude name="xalan.jar"/>
+				<exclude name="xml-apis.jar"/>
+				<exclude name="xforms.jar"/>
+				<exclude name="XformsChiba.jar"/>
+				<exclude name="XformsCommon.jar"/>
+				<exclude name="XformsEngine.jar"/>
+				<exclude name="xml-ca.jar"/>
+				<exclude name="xsdlib.jar"/>  
+				<exclude name="log4j.jar"/>
+				<exclude name="licenses/**"/>
+			</zipfileset>
+			<zipfileset dir="${basedir}/build/util" prefix="lib">
+				<include name="wkfs-export-util.jar"/>
+			</zipfileset>
+			<zipfileset dir="${basedir}/lib/sqljdbc" prefix="lib">
+				<include name="sqljdbc.jar"/>
+			</zipfileset>
+			<zipfileset dir="${basedir}/lib/log4j" prefix="lib">
+				<include name="log4j-1.2.16.jar"/>
+			</zipfileset>
+			<zipfileset dir="${basedir}/lib/webcache" prefix="lib">
+				<include name="webcache.jar"/>
+			</zipfileset>
+			<zipfileset dir="${basedir}/env/${wkfs.env}/export_util" prefix="classes">
+				<include name="env.properties"/>
+			</zipfileset>
+			<zipfileset dir="${basedir}/env/common/export_util" prefix="classes">
+				<include name="help.txt"/>
+				<include name="log4j.properties"/>
+				<include name="export.properties"/>
+			</zipfileset>
+			<zipfileset dir="${basedir}/env/${wkfs.env}/dfc/wp" prefix="classes">
+				<include name="dfc.properties"/>
+			</zipfileset>
+			<zipfileset dir="${basedir}/env/common/export_util">
+				<include name="export.bat"/>
+			</zipfileset>
+		</zip>
+		<copy todir="${basedir}/build" file="${basedir}/build/util/wkfs-export-util.jar"/>
+		<delete dir="${basedir}/build/util"/>
+	</target>
+
+	<target name="compile-jms">
+		<mkdir dir="${basedir}/build/jms/classes"/>
+		<javac destdir="${basedir}/build/jms/classes" 
+				debug="on" 
+				debuglevel="lines,vars,source" 
+				source="1.6"
+				includeantruntime="false">
+			<src path="${basedir}/WorkFlowMethods"/>
+			<src path="${basedir}/src"/>
+			<include name="com/documentum/workflowmethod/**.java"/>
+			<include name="com/wkfs/ics/workflowmethod/**.java"/>
+			<include name="com/cchis/dctm/util/ICSPipelineConstants.java"/>			
+			<classpath refid="jms-libs"/>
+		</javac>
+	</target>
+
+	<target name="build-jms" depends="compile-jms">
+		<zip destfile="${basedir}/build/jms.zip">
+			<fileset dir="${basedir}/build/jms/classes"/>
+			<fileset dir="${basedir}/lib/content-server-6.7SP2">
+				<include name="commons-io-1.2.jar"/>
+			</fileset>
+		</zip>
+		<delete dir="${basedir}/build/jms"/>
+	</target>
+	
+	<target name="build-configs">
+		<copy todir="${basedir}/build/configs" overwrite="true">
+			<fileset dir="${basedir}/env"/>
+		</copy>
+	</target>
+	
+	<target name="build-dar">
+		<copy todir="${basedir}/build" overwrite="true">
+			<fileset dir="${basedir}/dar">
+				<include name="${dar.project}"/>
+			</fileset>
+		</copy>
+	</target>
+
+</project>

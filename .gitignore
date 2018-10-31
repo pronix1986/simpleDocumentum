@@ -8,3 +8,5 @@ src-leg
 .classpath
 .project
 simpleDocumentum.iml
+*.log
+*.bat
