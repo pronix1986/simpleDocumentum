@@ -10,3 +10,4 @@ src-leg
 simpleDocumentum.iml
 *.log
 *.bat
+lib/wp.war

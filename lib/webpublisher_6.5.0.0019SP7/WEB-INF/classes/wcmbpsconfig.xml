@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <!--    These are the sample settings -->
+
+    <docbaseconnection>wpTest</docbaseconnection>
+       
+    <bpsservername>d2keng6003.dctmlabs.com</bpsservername>
+    
+    <handlername>WcmExecuteMethodService</handlername>
+    
+    <smtpsettings>
+    	<hostname>cheetah.documentum.com</hostname>
+    	<portnumber>25</portnumber>
+    </smtpsettings>			 
+    
+    <httpsettings>
+        <hosturl>http://wcme01:8300/bps/http?DctmBpsHandler=LinkToTempFolder&amp;DctmBpsConnection=wpTest&amp;DctmBpsId=test</hosturl>
+        <bpshttpportnumber>8300</bpshttpportnumber>
+    </httpsettings>		
+
+</config>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?dctm fileVersion="5.3.0" compatibilityVersion="5.3.0"?>
+<components>
+	<component>
+		<componentName>xml-ca</componentName>
+		<invocationLocation>server</invocationLocation>
+        <minimumVersion>1.0</minimumVersion>
+<!--		<OS>
+			<name>Windows</name>
+			<name>Unix</name>
+		</OS> --> <!-- enum: [ ALL | Windows | Unix | Mac]
+		The set will depend on the OS that we support for client and server.
+		The absence of this element means that the component runs on any platform -->
+		<formatMappings>
+			<formatMapping>
+                <formats>
+                    <name>XML</name>
+                </formats>
+                <entryPoint>com.documentum.contentanalysis.server.xml.impl.XMLContentAnalysisComponent</entryPoint>
+            </formatMapping>
+        </formatMappings>
+	</component>
+
+
+    <component>
+		<componentName>office-automation-ca</componentName>
+		<invocationLocation>client</invocationLocation>
+        <minimumVersion>1.0</minimumVersion>        
+        <OS>
+			<name>windows</name>
+		</OS>		
+		<formatMappings>		
+			<formatMapping>
+				<formats>
+                    <name>msw</name>
+                    <name>msw12</name>                    
+                    <name>msw12me</name>
+                    <name>msw12metemplate</name>
+                    <name>msw12template</name>
+                    <name>msw3</name>
+                    <name>msw6</name>
+                    <name>msw6template</name>
+                    <name>msw8</name>
+                    <name>msw8template</name>
+                    <name>mswm</name>
+                    <name>msww</name>
+                </formats>
+				<entryPoint>com.documentum.contentanalysis.client.office.auto.impl.WordContentAnalysisComponent</entryPoint>
+            </formatMapping>
+			<formatMapping>
+				<formats>
+					<name>excel</name>
+					<name>excel2sheet</name>
+					<name>excel4sheet</name>
+                    <name>excel4book</name>
+                    <name>excel5book</name>
+					<name>excel8book</name>
+					<name>excel12book</name>
+					<name>excel12bbook</name>
+					<name>excel12mebook</name>
+                    <name>excel12metemplate</name>
+                    <name>excel12template</name>
+                    <name>excel8template</name>
+				</formats>
+				<entryPoint>com.documentum.contentanalysis.client.office.auto.impl.ExcelContentAnalysisComponent</entryPoint>
+			</formatMapping>
+			<formatMapping>
+				<formats>
+                    <name>powerpoint</name>
+                    <name>ppt_win3</name>
+                    <name>ppt_win4</name>
+                    <name>ppt_win7</name>
+                    <name>ppt12</name>
+                    <name>ppt12me</name>
+                    <name>ppt12meslideshow</name>
+                    <name>ppt12metemplate</name>
+                    <name>ppt12slideshow</name>
+                    <name>ppt12template</name>
+                    <name>ppt8</name>
+                    <name>ppt8_slide</name>
+                    <name>ppt8_template</name>
+                </formats>
+				<entryPoint>com.documentum.contentanalysis.client.office.auto.impl.PowerPointContentAnalysisComponent</entryPoint>
+            </formatMapping>
+		</formatMappings>
+	</component>	
+</components>

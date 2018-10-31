@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editlive>
+    <document>
+        <html>
+            <head>
+                <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+                <style type="text/css">
+                     <!--
+p {font-size:medium}
+        body {font-family:Arial Unicode MS}
+		p.cautionline{FONT-SIZE: smaller; COLOR: #FF0000;}
+		p.signature{FONT-SIZE: smaller; COLOR: #4B0082;}
+		p.intexthead{  FONT-WEIGHT: bold;COLOR: #000000;TEXT-ALIGN: center}
+
+			span.defterm {display: inline; color:blue; font-size:larger;}
+			span.ExtQuote {display: block;   FONT-SIZE: 9pt; MARGIN-LEFT: 10pt;COLOR: #000000; MARGIN-RIGHT: 10pt;}					
+			span.Footref{ vertical-align: super; FONT-SIZE: 8pt; }
+			span.Footnum{ display: block; vertical-align: super; FONT-SIZE: smaller;}
+
+span.FootNote
+{
+	display: block;
+	FONT-SIZE: smaller;
+	COLOR: Red;
+	TEXT-INDENT: 10pt;
+	FONT-FAMILY: Verdana, Arial;
+	line-height: 20px;
+	background-color: #FFFF00;
+}
+span.EndNote{
+	display: block;
+	FONT-SIZE: smaller;
+	COLOR: Red;
+	TEXT-INDENT: 10pt;
+	FONT-FAMILY: Verdana, Arial;
+	line-height: 20px;
+	background-color: #FFFF00;
+}
+			
+span.TableNote{
+	display: block;
+	FONT-SIZE: smaller;
+	COLOR: Red;
+	TEXT-INDENT: 10pt;
+	FONT-FAMILY: Verdana, Arial;
+	line-height: 20px;
+	background-color: #FFFF00;
+}
+
+-->
+                </style>
+            </head>
+            <body alink="" background="" bgColor="" link="" text="" vlink=""/>
+        </html>
+    </document>
+    <ephoxLicenses>
+	<license
+	domain=""
+	key="0FFF-9624-2E0A-2CD8"
+	licensee="EMC Corporation (Documentum)"
+	type="Custom/OEM"
+	release="8.0"
+	productivityPack="false"
+	/> 
+
+	<!--<license
+		accountID="497D03542FCA"
+		activationURL="http://www.ephox.com/elregister/el2/activate.asp"
+		domain="DOCUMENTUM"
+		expiration=""
+		forceActive="false"
+		key="0FFF-9624-2E0A-2CD8"
+		eqEditor="false"
+		productivityPack="false"
+		licensee="DOCUMENTUM"
+		product="EditLive for Java"
+		release="6.0"
+	/> -->
+    </ephoxLicenses>
+
+    <splashScreen shown="false"/>
+    <menuBar showAboutMenu="false" />
+    <wysiwygEditor tabPlacement="bottom" showDocumentNavigator="false"/>
+    <sourceEditor enabled="true" showBodyOnly="true" errorDialog="simple" />
+
+    <htmlFilter indentContent="false" encloseText="true"
+        logicalEmphasis="false" outputXHTML="true" outputXML="true"
+        quoteMarks="false" removeFontTags="false" allowUnkownTags="true"
+        uppercaseAttributes="false" uppercaseTags="false" wrapLength="0"/>
+    <wordImport styleOption="clean"/>
+    <mediaSettings>
+        <httpUpload base="" href=""/>
+        <images allowLocalImages="true" allowUserSpecified="true">
+            <imageList/>
+        </images>
+    </mediaSettings>
+    <hyperlinks>
+        <hyperlinkList/>
+        <mailtoList/>
+    </hyperlinks>
+    <menubar showAboutMenu="false"/>
+    <toolbars>
+        <commandToolbar>
+            <toolbarButton name="popout" /> <!--For Bug WEBPUB-10509 -->
+            <toolbarButton name="Accessibility" />
+            <toolbarButton name="tlbCut"/>
+            <toolbarButton name="tlbCopy"/>
+            <toolbarButton name="tlbPaste"/>
+            <toolbarSeparator/>
+            <toolbarButton name="tlbUndo"/>
+            <toolbarButton name="tlbRedo"/>
+            <toolbarSeparator/>
+            <toolbarButton name="tlbRemoveFormatting"/>
+           <!--  <toolbarButton name="tlbSpelling"/>
+            <toolbarButton name="BackgroundSpellChecking"/> -->
+            <toolbarButton name="tlbFind"/>
+            <toolbarButton name="tlbWordCount"/>
+            <toolbarSeparator/>
+            <toolbarButton name="tlbHRule"/>
+            <toolbarButton name="tlbHLink"/>
+            <toolbarButton name="RemoveHyperlink"/>
+            <toolbarButton name="InsertComment"/>
+            <toolbarButton name="FormatPainter"/>
+            <toolbarButton name="DateTime"/>
+            <toolbarButton name="tlbSymbol"/>
+            <toolbarButton name="tlbBookmark"/>
+            <toolbarButton name="tlbImageServer"/>
+            <toolbarSeparator/>
+           <!--            <toolbarButton name="tlbInsTable"/> -->
+            <toolbarButton name="InsTableWizard"/>
+            <toolbarButton name="tlbInsRow"/>
+            <toolbarButton name="tlbInsCol"/>
+            <toolbarButton name="tlbDelRow"/>
+            <toolbarButton name="tlbDelCol"/>
+            <toolbarButton name="tlbSplit"/>
+            <toolbarButton name="tlbMerge"/>
+            <toolbarButton name="tlbGridlines"/>
+            <toolbarSeparator/>   
+        </commandToolbar>
+        <formatToolbar>
+            <toolbarComboBox name="tlbStyle">
+                <comboBoxItem name="P" text="Normal"/>
+            <!-- <comboBoxItem name="H1" text="Heading 1"/>
+                <comboBoxItem name="H2" text="Heading 2"/>
+                <comboBoxItem name="H3" text="Heading 3"/>
+                <comboBoxItem name="H4" text="Heading 4"/>
+                <comboBoxItem name="H5" text="Heading 5"/>
+                <comboBoxItem name="H6" text="Heading 6"/>  -->  
+                <comboBoxItem name="PRE" text="Formatted"/>
+                <comboBoxItem name="ADDRESS" text="Address"/>
+            </toolbarComboBox>
+            <toolbarComboBox name="tlbFace">
+				<comboBoxItem name="Arial Unicode MS" text="Arial Unicode MS"/>
+                <comboBoxItem name="Arial" text="Arial"/>
+                <comboBoxItem name="Courier New" text="Courier New"/>
+                <comboBoxItem name="Times New Roman" text="Times New Roman"/>
+                <comboBoxItem name="Verdana" text="Verdana"/>
+            </toolbarComboBox>
+            <toolbarComboBox name="tlbSize">
+                <comboBoxItem name="1" text="8"/>
+                <comboBoxItem name="2" text="10"/>
+                <comboBoxItem name="3" text="12"/>
+                <comboBoxItem name="4" text="14"/>
+                <comboBoxItem name="5" text="18"/>
+                <comboBoxItem name="6" text="24"/>
+                <comboBoxItem name="7" text="36"/>
+            </toolbarComboBox>
+            <toolbarSeparator/>
+            <toolbarButton name="tlbBold"/>
+            <toolbarButton name="tlbItalic"/>
+            <toolbarButton name="tlbUnderline"/>
+            <toolbarButton name="tlbStrike"/>
+            <toolbarSeparator/>
+            <toolbarButtonGroup name="tlbAlign"/>
+            <toolbarSeparator/>
+            <toolbarButtonGroup name="tlbList"/>
+            <toolbarButton name="tlbDecreaseIndent"/>
+            <toolbarButton name="tlbIncreaseIndent"/>
+            <toolbarSeparator/>
+            <toolbarButton name="tlbHighlightColor"/>
+            <toolbarButton name="tlbColor"/>
+            <toolbarSeparator/>
+            <toolbarButtonGroup name="tlbScript"/>
+        </formatToolbar>
+    </toolbars>
+    <shortcutMenu>
+        <shrtMenu>
+            <shrtMenuItem name="shrtCut"/>
+            <shrtMenuItem name="shrtCopy"/>
+            <shrtMenuItem name="shrtPaste"/>
+            <shrtMenuSeparator/>
+            <shrtMenuItem name="shrtSelectAll"/>
+            <shrtMenuItem name="shrtPropImage"/>
+            <shrtMenuItem name="shrtPropTable"/>
+            <shrtMenuItem name="shrtPropCell"/>
+            <shrtMenuItem name="shrtHyperlink"/>
+            <shrtMenuItem name="RemoveHyperlink"/>
+            <shrtMenuItem name="shrtEdittag"/>
+        </shrtMenu>
+    </shortcutMenu>
+
+    <action-mapping>
+        <contentwidget-action>bold</contentwidget-action>
+        <editlive-action>tlbBold</editlive-action>
+    </action-mapping>
+
+    <action-mapping>
+        <contentwidget-action>italic</contentwidget-action>
+        <editlive-action>tlbItalic</editlive-action>
+    </action-mapping>
+
+    <action-mapping>
+        <contentwidget-action>color</contentwidget-action>
+        <editlive-action>tlbColor</editlive-action>
+    </action-mapping>
+
+    <action-mapping>
+        <contentwidget-action>cut</contentwidget-action>
+        <editlive-action>tlbCut</editlive-action>
+    </action-mapping>
+
+    <action-mapping>
+        <contentwidget-action>copy</contentwidget-action>
+        <editlive-action>tlbCopy</editlive-action>
+    </action-mapping>
+
+    <action-mapping>
+        <contentwidget-action>paste</contentwidget-action>
+        <editlive-action>tlbPaste</editlive-action>
+    </action-mapping>
+
+    <action-mapping>
+        <contentwidget-action>pasteHTML</contentwidget-action>
+        <editlive-action>tlbPaste</editlive-action>
+    </action-mapping>
+
+     <action-mapping>
+            <contentwidget-action>fontSize</contentwidget-action>
+            <editlive-action>tlbSize</editlive-action>
+    </action-mapping>
+
+
+    <action-mapping>
+        <contentwidget-action>unorderedLists</contentwidget-action>
+        <editlive-action>tlbList</editlive-action>
+    </action-mapping>
+
+    <action-mapping>
+        <contentwidget-action>orderedLists</contentwidget-action>
+        <editlive-action>tlbList</editlive-action>
+    </action-mapping>
+
+    <action-mapping>
+        <contentwidget-action>indent</contentwidget-action>
+        <editlive-action>tlbIncreaseIndent</editlive-action>
+        <editlive-action>tlbDecreaseIndent</editlive-action>
+    </action-mapping>
+
+    <action-mapping>
+        <contentwidget-action>align</contentwidget-action>
+        <editlive-action>tlbAlign</editlive-action>
+    </action-mapping>
+
+    <action-mapping>
+        <contentwidget-action>links</contentwidget-action>
+        <editlive-action>tlbHLink</editlive-action>
+    </action-mapping>
+
+<!--     <action-mapping>
+        <contentwidget-action>spellcheck</contentwidget-action>
+        <editlive-action>tlbSpelling</editlive-action>
+        <editlive-action>BackgroundSpellChecking</editlive-action>
+    </action-mapping> -->
+
+    <action-mapping>
+        <contentwidget-action>accessibilitycheck</contentwidget-action>
+        <editlive-action>tlbAccessibility</editlive-action>
+        <editlive-action>Accessibility</editlive-action>
+    </action-mapping>
+
+    <action-mapping>
+        <contentwidget-action>table</contentwidget-action>
+     <editlive-action>InsTableWizard</editlive-action>   
+        <editlive-action>tlbInsRow</editlive-action>
+        <editlive-action>tlbInsCol</editlive-action>
+        <editlive-action>tlbDelRow</editlive-action>
+        <editlive-action>tlbDelCol</editlive-action>
+        <editlive-action>tlbSplit</editlive-action>
+        <editlive-action>tlbMerge</editlive-action>
+        <editlive-action>tlbGridlines</editlive-action>
+    </action-mapping>
+
+<!-- 	<plugins>
+		<plugin name="spelling" />
+	</plugins> -->
+
+    <dictionary>
+        <!--default dictionary to use when object has no locale-->
+        <default>/wp/editors/contenteditor/dictionary/en_us_4_0.jar</default>
+        <!-- English US-->
+        <en_US>/wp/editors/contenteditor/dictionary/en_us_4_0.jar</en_US>
+    </dictionary>
+</editlive>

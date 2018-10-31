@@ -1,0 +1,1 @@
+Documentum uses 'truncated' log4j library. For example, there's no SMTPAppender there.

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?dctm fileVersion="5.3.0.1" compatibilityVersion="5.3.0.1"?>
+<configurations>
+   <configuration name="com.documentum.ucf">
+      <option name="temp.working.dir">
+         <value>$java{java.io.tmpdir}/Documentum/ucf/temp</value>
+      </option>
+      <option name="tracing.enabled">
+         <value>false</value>
+      </option>
+      <option name="file.poll.interval">
+         <value>60</value>
+      </option>
+      <option name="compression.exclusion.formats">
+         <value>aifc</value>
+         <value>aiff</value>
+         <value>asf</value>
+         <value>au</value>
+         <value>avi</value>
+         <value>bmp</value>
+         <value>dv</value>
+         <value>ear</value>
+         <value>fla</value>
+         <value>gif</value>
+         <value>gz</value>
+         <value>jar</value>
+         <value>jpeg</value>
+         <value>jpg</value>
+         <value>mov</value>
+         <value>mp3</value>
+         <value>mp4</value>
+         <value>mpg2</value>
+         <value>mpg</value>
+         <value>mxf</value>
+         <value>pcd</value>
+         <value>pct</value>
+         <value>pcx</value>
+         <value>png</value>
+         <value>psd</value>
+         <value>ra</value>
+         <value>ram</value>
+         <value>rm</value>
+         <value>rmm</value>
+         <value>rnx</value>
+         <value>rv</value>
+         <value>sgi</value>
+         <value>svg</value>
+         <value>swf</value>
+         <value>voc</value>
+         <value>war</value>
+         <value>wav</value>
+         <value>wma</value>
+         <value>wmv</value>
+         <value>zip</value>
+      </option>
+      <option name="server.session.timeout.seconds">
+         <value>250</value>
+      </option>
+      <option name="error.resource.bundles">
+         <value>com.documentum.contentanalysis.server.xml.impl.XMLContentAnalysisResourceBundle</value>
+	  </option>
+      <option name="notification.resource.bundles">
+         <value>com.documentum.contentanalysis.server.xml.impl.XMLContentAnalysisNotificationBundle</value>
+      </option>
+      <option name="initgair.max.wait.seconds">
+         <value>120</value>
+      </option>
+   </configuration>
+</configurations>
